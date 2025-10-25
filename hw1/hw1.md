@@ -168,10 +168,12 @@ $$
 ### 3.3
 
 We want to prove that the upper bound on the number of served queries hold for all machines simultaneously with high probability. That is
+
 $$
 \mathbb{P}[\forall q, X_q < 1.5\mu)] > 1 - m^{-c_2}
 \iff \mathbb{P}[\exists q, X_q \geq 1.5\mu)] \leq m^{-c_2},
 $$
+
 for some constant $c_2$. By the union bound
 
 $$
