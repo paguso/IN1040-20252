@@ -94,8 +94,6 @@ $ ./problem2 <nb_of_repetitions>
 
 ## Problem 3
 
-**Assumption:** queries are **uniformly** distributed among nodes.
-
 ### 3.1
 
 Let
