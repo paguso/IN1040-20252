@@ -88,3 +88,71 @@ $$
 $ g++ -O3 problem2.cpp -o problem2
 $ ./problem2 <nb_of_repetitions>
 ```
+
+
+
+## Problem 4
+
+### 4.1
+
+**Simulation:** [problem4.py](./problem4.py)
+
+```sh
+$ python3 problem4.py <nb_repetitions> <max_nb_of_people>
+```
+
+**Conjecture:** The probability of the last person taking its own jacket is 0.5.
+
+### 4.2
+
+Consider the scenario as described for a group of $N > 1$ people. (For $N=1$ the problem is trivial). Then let 
+- jackets/people be numbered $0,\ldots, N-1$.
+- $X_i\in\{0,\ldots, N-1\}$ be the r.v. representing the  jacket picked up by person $i=0,\ldots, N-1$
+- $[X_k = j]$ denote the event "Person #$k$ picked jacket #$j$"
+
+**Conjecture:** For all $N > 1$,  $\mathbb{P}[X_{N-1}=N-1] = 1/2$
+
+**Base.** For $N=2$, person #1 picks its own jacket iff person #0 picks its own jacket, and $\mathbb{P}[X_0=0] = 1/2$.
+
+**Step.** Consider $N>2$.
+
+- By the law of total probability
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[X_{N-1}=N-1] &=   \mathbb{P}[X_{N-1}=N-1 \cap X_0=0] \\
+&+ \mathbb{P}[X_{N-1}=N-1 \cap X_0=N-1]  \\
+&+ \mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1] \\
+&= \mathbb{P}[X_{N-1}=N-1 | X_0=0]\cdot \mathbb{P}[X_0=0] \qquad(case\ 0)\\
+&+ \mathbb{P}[X_{N-1}=N-1 | X_0=N-1]\cdot \mathbb{P}[X_0=N-1] \qquad(case\ 1)\\
+&+ \mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1]
+\end{split}
+\end{equation*}
+$$
+
+- In case 0, if $X_0=0$ then every other person will pick its own jacket. Thus 
+$$
+\mathbb{P}[X_{N-1}=N-1 | X_0=0]\cdot \mathbb{P}[X_0=0] = 1 \cdot \frac{1}{N} = \frac1N.
+$$ 
+- In case 1, if $X_0=N-1$ then of course person $N-1$ cannot have its own jacket. Thus
+$$
+\mathbb{P}[X_{N-1}=N-1 | X_0=N-1]\cdot \mathbb{P}[X_0=N-1] = 0 \cdot \frac{1}{N} = 0.
+$$ 
+- In case 3, suppose $X_0=k$, for some given $k\in\{1,\ldots, N-2\}$. After that, people with numbers #$i=1,\ldots,k-1$ will necessarily each take its own jacket and leave. Then we will eventually have a situation with $N-k$ people numbered $k,k+1,\ldots,N-1$ and $N-k$ jackets numbered $0,k+1,k+2,\ldots,N-1$. This scenario is equivalent to the original setting but with a smaller number $N'=N-k$ of people, sufficing to relabel people/jackets. The fact that the first remaining jacket (#0) is not the original jacket of the first remaining person (#$k$) is irrelevant since, in this situation, he/she will pick a jacket at random, as he/she would if the game were just starting with each person's original jackets. Thus
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1] 
+&= \sum_{k=1}^{N-2} \mathbb{P}[X_{N-1}=N-1 | X_0 = k]\cdot\mathbb{P}[X_0=k]\\
+&= \sum_{k=1}^{N-2} \frac12\cdot\mathbb{P}[X_0=k] \qquad (h.i.)\\
+&= \frac12 \sum_{k=1}^{N-2} \mathbb{P}[X_0=k]\\
+&= \frac12 \cdot (N-2) \cdot \frac1N \\ 
+&= \frac{N-2}{2N}.
+\end{split}
+\end{equation*}
+$$
+
+- Summarising all three cases:
+
+$$\mathbb{P}[X_{N-1}=N-1] = \frac1N + 0 + \frac{N-2}{2N} = \frac12.$$
