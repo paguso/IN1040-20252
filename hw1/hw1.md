@@ -72,6 +72,7 @@ I_j = \begin{cases}
 $$
 
 Then $X = \sum_{j=0}^{n-5} I_j$ and so 
+
 $$
 \begin{equation*}
 \begin{split}
@@ -140,10 +141,12 @@ $$
 $$
 
 - In case 0, if $X_0=0$ then every other person will find and pick its own jacket. Thus 
+
 $$
 \mathbb{P}[X_{n-1}=n-1 | X_0=0]\cdot \mathbb{P}[X_0=0] = 1 \cdot \frac{1}{n} = \frac1n.
 $$ 
 - In case 1, if $X_0=n-1$ then of course person $n-1$ cannot have its own jacket. Thus
+
 $$
 \mathbb{P}[X_{n-1}=n-1 | X_0=n-1]\cdot \mathbb{P}[X_0=n-1] = 0 \cdot \frac{1}{n} = 0.
 $$ 
