@@ -82,7 +82,7 @@ $$
 \end{equation*}
 $$
 
-**Simulation** [problem2.cpp](./problem2.cpp)
+**Simulation** [problem2.cpp](./problem2.cpp) (python is too slow)
 
 ```sh
 $ g++ -O3 problem2.cpp -o problem2
