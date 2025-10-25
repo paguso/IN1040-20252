@@ -145,7 +145,7 @@ Setting $\delta = 1/2$ and $\mu = \mathbb{E}[X_q]= n/m$, and applying the Cherno
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{P}[X_q < 1.5\mu] &> 1 - \exp\left\{-\frac{\frac14}{2+\frac12}\mu\right\}\\
+\mathbb{P}[X_q < 1.5\mu] &> 1 - \exp\left(-\frac{\frac14}{2+\frac12}\mu\right)\\
 &= 1 - (e^{\frac nm})^{-\frac{1}{10}}
 \end{split}
 \end{equation*}
