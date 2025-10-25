@@ -187,6 +187,16 @@ $$
 
 By setting $c_2 = c_1 - 1$, we have the claim.
 
+**Simulation:** [problem3.py](./problem3.py)
+
+```sh
+$ python3 problem3.py <nb_repetitions> <nb_machines> <load_factor>
+```
+
+`load_factor` is a multiplicative factor that controls how much larger than the expected `n/m` queries per server the actual number of served queries has to be to be considered too much (default 1.5 as in the problem statement).
+
+
+
 ## Problem 4
 
 ### 4.1
