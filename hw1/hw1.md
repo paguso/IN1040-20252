@@ -107,10 +107,12 @@ $ python3 problem4.py <nb_repetitions> <max_nb_of_people>
 
 Consider the scenario as described for a group of $N > 1$ people. (For $N=1$ the problem is trivial). Then let 
 - jackets/people be numbered $0,\ldots, N-1$.
-- $X_i\in\{0,\ldots, N-1\}$ be the r.v. representing the  jacket picked up by person $i=0,\ldots, N-1$
-- $[X_k = j]$ denote the event "Person #$k$ picked jacket #$j$"
+- $X_i\in\{0,\ldots, N-1\}$ be the r.v. representing the jacket picked by person $i=0,\ldots, N-1$
+- $[X_k = j]$ denote the event "Person $k$ picked jacket $j$"
 
-**Conjecture:** For all $N > 1$,  $\mathbb{P}[X_{N-1}=N-1] = 1/2$
+**Conjecture:** For all $N > 1$,  $\mathbb{P}[X_{N-1}=N-1] = 1/2$.
+
+The proof is by induction on $N$.
 
 **Base.** For $N=2$, person #1 picks its own jacket iff person #0 picks its own jacket, and $\mathbb{P}[X_0=0] = 1/2$.
 
@@ -126,12 +128,12 @@ $$
 &+ \mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1] \\
 &= \mathbb{P}[X_{N-1}=N-1 | X_0=0]\cdot \mathbb{P}[X_0=0] \qquad(case\ 0)\\
 &+ \mathbb{P}[X_{N-1}=N-1 | X_0=N-1]\cdot \mathbb{P}[X_0=N-1] \qquad(case\ 1)\\
-&+ \mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1]
+&+ \mathbb{P}[X_{N-1}=N-1 \cap 0 < X_0 < N-1] \qquad(case\ 2)
 \end{split}
 \end{equation*}
 $$
 
-- In case 0, if $X_0=0$ then every other person will pick its own jacket. Thus 
+- In case 0, if $X_0=0$ then every other person will find and pick its own jacket. Thus 
 $$
 \mathbb{P}[X_{N-1}=N-1 | X_0=0]\cdot \mathbb{P}[X_0=0] = 1 \cdot \frac{1}{N} = \frac1N.
 $$ 
@@ -139,7 +141,7 @@ $$
 $$
 \mathbb{P}[X_{N-1}=N-1 | X_0=N-1]\cdot \mathbb{P}[X_0=N-1] = 0 \cdot \frac{1}{N} = 0.
 $$ 
-- In case 3, suppose $X_0=k$, for some given $k\in\{1,\ldots, N-2\}$. After that, people with numbers #$i=1,\ldots,k-1$ will necessarily each take its own jacket and leave. Then we will eventually have a situation with $N-k$ people numbered $k,k+1,\ldots,N-1$ and $N-k$ jackets numbered $0,k+1,k+2,\ldots,N-1$. This scenario is equivalent to the original setting but with a smaller number $N'=N-k$ of people, sufficing to relabel people/jackets. The fact that the first remaining jacket (#0) is not the original jacket of the first remaining person (#$k$) is irrelevant since, in this situation, he/she will pick a jacket at random, as he/she would if the game were just starting with each person's original jackets. Thus
+- In case 2, suppose $X_0=k$, for some given $k\in\{1,\ldots, N-2\}$. After that, people with numbers #$i=1,\ldots,k-1$ will necessarily each take its own jacket and leave. Then we will eventually have a situation with $N-k$ people numbered $k,k+1,\ldots,N-1$ and $N-k$ jackets numbered $0,k+1,k+2,\ldots,N-1$. This scenario is equivalent to the original setting but with a smaller number $N'=N-k$ of people, sufficing to relabel people/jackets. The fact that the first remaining jacket (#0) is not the original jacket of the first remaining person (#$k$) is irrelevant since, in this situation, he/she will pick a jacket at random, just as he/she would if the game were just starting with each person's original jackets. Thus
 $$
 \begin{equation*}
 \begin{split}
@@ -156,3 +158,35 @@ $$
 - Summarising all three cases:
 
 $$\mathbb{P}[X_{N-1}=N-1] = \frac1N + 0 + \frac{N-2}{2N} = \frac12.$$
+
+
+## Problem 5
+
+**Assumption:** $N$ is finite and known.
+
+In this case, let's say the number in the paper you picked is $A=k$. Let $B$ be the number in the other piece of paper. There are $n-1$ possibilities for $B$, of which, $k-1$ are smaller than $k$, and $n-k$ are greater than $k$. 
+Thus, as a strategy, you can pick a number $T$ uniformily at random in $\{1,\ldots,k-1,k+1,\ldots,n\}$ and call:
+- $A < B$ (the number you chose is the smallest), if  $T > k$; or else
+- $B < A$ (the number you chose is the greatest),  if $T < k$.
+
+You are basically simulating the choice of the other paper. 
+
+Now, suppose Emilio had written two given numbers $a < b$. You could have chosen any of the two papers at random, that is $A=a$ or $A=b$, each with equal $0.5$ probability. The probability of the call being right is thus 
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[OK] &= \mathbb{P}[OK \cap A=a] + \mathbb{P}[OK \cap A=b]\\
+&= \mathbb{P}[OK | A=a]\mathbb{P}[A=a] + \mathbb{P}[OK | A=b]\mathbb{P}[A=b]\\ 
+&= \frac12\left( \mathbb{P}[OK | A=a] + \mathbb{P}[OK | A=b]\right) \\ 
+\end{split}
+\end{equation*}
+$$
+
+$\mathbb{P}[OK | A=a]$ means "the probability of being right given you had chosen the smallest of the two numbers". In this case you'd have picked $T$ uniformly at random in $1,\ldots,a-1,a+1,\ldots,n$ and you'd have guessed right only if $T>a$, which would have happened with probability $\frac{n-a}{n-1}$.
+Similarly $\mathbb{P}[OK | A=b] = \frac{b-1}{n-1}$. Thus
+
+$$
+\mathbb{P}[OK]  = \frac12\left( \frac{n-a}{n-1} + \frac{b-1}{n-1}\right)
+= \frac12\left( \frac{(n-1)+(b-a)}{n-1} \right) = \frac12 + \frac{b-a}{2(n-1)} > \frac12.
+$$
