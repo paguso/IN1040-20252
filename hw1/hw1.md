@@ -133,8 +133,8 @@ $$
 $X_i\sim Bernoulli(p_i)$, for $i=0\ldots n-1$. Let $\mu = \mathbb{E}[X] = \sum_{i=0}^{n-1}p_i$. Then
 
 $$
-\mathbb{P}[X \geq (1 + \delta)\mu)] \leq \exp\left\{-\frac{\delta^2\mu}{2+\delta}\right\}
-\implies \mathbb{P}[X < (1 + \delta)\mu)] > 1-\exp\left\{-\frac{\delta^2\mu}{2+\delta}\right\}
+\mathbb{P}[X \geq (1 + \delta)\mu)] \leq \exp\left(-\frac{\delta^2\mu}{2+\delta}\right)
+\implies \mathbb{P}[X < (1 + \delta)\mu)] > 1-\exp\left(-\frac{\delta^2\mu}{2+\delta}\right)
 , \text{for $\delta > 0$.}
 $$
 
