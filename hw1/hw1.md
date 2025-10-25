@@ -137,6 +137,7 @@ $$
 \implies \mathbb{P}[X < (1 + \delta)\mu)] > 1-\exp\left\{-\frac{\delta^2\mu}{2+\delta}\right\}
 , \text{for $\delta > 0$.}
 $$
+
 ---
 
 Setting $\delta = 1/2$ and $\mu = \mathbb{E}[X_q]= n/m$, and applying the Chernoff Inequality, we have
