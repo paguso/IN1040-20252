@@ -94,9 +94,97 @@ $ ./problem2 <nb_of_repetitions>
 
 ## Problem 3
 
+**Assumption:** queries are **uniformly** distributed among nodes.
 
+### 3.1
 
+Let
+- Queries be numbered $q=0,\ldots, n-1$
+- Machines be numbered $s=0,..., m-1$
 
+Define the r.v.s
+
+$$
+I_{qs} = \begin{cases}
+1,\ \text{if query $q$ was served by machine $s$}\\
+0,\ \text{otherwise}.
+\end{cases},
+$$,
+
+We assume that $I_{qs}\stackrel{iid}{\sim} Bernoulli(1/m)$. 
+
+The number of queries served by machine $s$ is 
+
+$$X_s=\sum_{q=0}^{n-1} I_{qs}.$$
+
+Then
+
+$$
+\mathbb{E}[X_s] = \mathbb{E}\left[\sum_{q=0}^{n-1} I_{qs}\right]
+= \sum_{q=0}^{n-1}\mathbb{E}[I_{qs}]
+= \sum_{q=0}^{n-1}\frac1m = \frac{n}{m}.
+$$
+
+### 3.2
+
+---
+
+**Theorem  (Chernoff Bound)**. Let the r.v $X=\sum_{i=0}^{n-1}X_i$ be the sum of independent Bernoulli r.v's 
+$X_i\sim Bernoulli(p_i)$, for $i=0\ldots n-1$. Let $\mu = \mathbb{E}[X] = \sum_{i=0}^{n-1}p_i$. Then
+
+$$
+\mathbb{P}[X \geq (1 + \delta)\mu)] \leq \exp\left\{-\frac{\delta^2\mu}{2+\delta}\right\}
+\implies \mathbb{P}[X < (1 + \delta)\mu)] > 1-\exp\left\{-\frac{\delta^2\mu}{2+\delta}\right\}
+, \text{for $\delta > 0$.}
+$$
+---
+
+Setting $\delta = 1/2$ and $\mu = \mathbb{E}[X_q]= n/m$, and applying the Chernoff Inequality, we have
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[X_q < 1.5\mu] &> 1 - \exp\left\{-\frac{\frac14}{2+\frac12}\mu\right\}\\
+&= 1 - (e^{\frac nm})^{-\frac{1}{10}}
+\end{split}
+\end{equation*}
+$$
+
+Since $n\gg 120m\ln m$, we have
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[X_q < 1.5\mu] &> 
+1 - (e^{\frac{120m\ln m}{m}})^{-\frac{1}{10}} \\
+&= 1 - (e^{120\ln m})^{-\frac{1}{10}} \\
+&= 1 - (e^{\ln m})^{-\frac{120}{10}} \\
+&= 1 - m^{-12}. 
+\end{split}
+\end{equation*}
+$$
+
+### 3.3
+
+We want to prove that the upper bound on the number of served queries hold for all machines simultaneously with high probability. That is
+$$
+\mathbb{P}[\forall q, X_q < 1.5\mu)] > 1 - m^{-c_2}
+\iff \mathbb{P}[\exists q, X_q \geq 1.5\mu)] \leq m^{-c_2},
+$$
+for some constant $c_2$. By the union bound
+
+$$
+\begin{equation*}
+\begin{split}
+\mathbb{P}[\exists q, X_q \geq 1.5\mu] 
+&\leq \sum_{q=0}^{m-1} \mathbb{P}[X_q \geq 1.5\mu] \\
+&\leq \sum_{q=0}^{m-1} m^{-c_1} \qquad(3.2)\\
+&= m\cdot m^{-c_1} = m^{-c_1+1}.
+\end{split}
+\end{equation*}
+$$
+
+By setting $c_2 = c_1 - 1$, we have the claim.
 
 ## Problem 4
 
