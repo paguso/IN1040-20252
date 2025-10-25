@@ -109,7 +109,7 @@ I_{qs} = \begin{cases}
 1,\ \text{if query $q$ was served by machine $s$}\\
 0,\ \text{otherwise}.
 \end{cases},
-$$,
+$$
 
 We assume that $I_{qs}\stackrel{iid}{\sim} Bernoulli(1/m)$. 
 
