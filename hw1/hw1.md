@@ -3,14 +3,14 @@
 ## Problem 1
 
 Let 
-- $X= \{x_0,\ldots, x_{51}\}$ denote the set of 52 distinct cards
-- $x_i.val \in \{A=1, 2,..., 10, J=11, Q=12, K=13\}$ denote the numeric value of the card
-- $x_i.suit \in \{C, D, H, S \}$ (Clubs ♣, Diamonds ♦, Hearts ♥, Spades ♠) denote the **suit** of the card $x_i$
+- $X= \lbrace x_0,\ldots, x_{51}\rbrace$ denote the set of 52 distinct cards
+- $x_i.val \in \lbrace A=1, 2,..., 10, J=11, Q=12, K=13\rbrace$ denote the numeric value of the card
+- $x_i.suit \in \lbrace C, D, H, S \rbrace$ (Clubs ♣, Diamonds ♦, Hearts ♥, Spades ♠) denote the **suit** of the card $x_i$
  
 
 ### 1.1
 
-- The probability space $\Omega = \{ E_0, \ldots, E_{n-1} \}$ is the set of all
+- The probability space $\Omega = \lbrace  E_0, \ldots, E_{n-1} \rbrace$ is the set of all
 $n=52!$ distinct permutations of $X$. 
 - Each event (permutation) has the same probability $p=1/n=1/52!$
 
@@ -24,7 +24,7 @@ $n=52!$ distinct permutations of $X$.
 
 $$
 \begin{align*}
-\mathbb{P}[y_0.suit = y_1.suit = y_2.suit = D] &= \mathbb{P}[\cap_{j=0}^3\  y_j.suit = D] \\
+\mathbb{P}[y_0.suit = y_1.suit = y_2.suit = D] &= \mathbb{P}[\cap_{j=0}^2\  y_j.suit = D] \\
 &= \frac{13}{52} \cdot \frac{12}{51} \cdot \frac{11}{50} \approx 0.0129\\
 \end{align*}
 $$
@@ -36,9 +36,9 @@ $$
 
 $$
 \begin{align*}
-\mathbb{P}[\cup_{j=0}^5\  y_j.val = A] 
-&= 1-\mathbb{P}[\overline{\cup_{j=0}^5\  y_j.val = A}] \\
-&= 1-\mathbb{P}[\cap_{j=0}^5\  y_j.val \neq A] \\
+\mathbb{P}[\cup_{j=0}^4\  y_j.val = A] 
+&= 1-\mathbb{P}[\overline{\cup_{j=0}^4\  y_j.val = A}] \\
+&= 1-\mathbb{P}[\cap_{j=0}^4\  y_j.val \neq A] \\
 &= 1-(\frac{48}{52}\cdot\frac{47}{51}\cdot\frac{46}{50}\cdot\frac{45}{49}\cdot\frac{44}{48}) \approx 0.3412 
 \end{align*}
 $$
@@ -207,20 +207,20 @@ $ python3 problem3.py <nb_repetitions> <nb_machines> <load_factor>
 $ python3 problem4.py <nb_repetitions> <max_nb_of_people>
 ```
 
-**Conjecture:** The probability of the last person taking its own jacket is 0.5.
+**Conjecture:** The probability of the last person taking their own jacket is 0.5.
 
 ### 4.2
 
 Consider the scenario as described for a group of $n > 1$ people. (For $n=1$ the problem is trivial). Then let 
 - jackets/people be numbered $0,\ldots, n-1$.
-- $X_i\in\{0,\ldots, n-1\}$ be the r.v. representing the jacket picked by person $i=0,\ldots, n-1$
+- $X_i\in\lbrace 0,\ldots, n-1\rbrace$ be the r.v. representing the jacket picked by person $i=0,\ldots, n-1$
 - $[X_k = j]$ denote the event "Person $k$ picked jacket $j$"
 
 **Conjecture:** For all $n > 1$,  $\mathbb{P}[X_{n-1}=n-1] = 1/2$.
 
 The proof is by induction on $n$.
 
-**Base.** For $n=2$, person #1 picks its own jacket iff person #0 picks its own jacket, and $\mathbb{P}[X_0=0] = 1/2$.
+**Base.** For $n=2$, person #1 picks their own jacket iff person #0 picks their own jacket, and $\mathbb{P}[X_0=0] = 1/2$.
 
 **Step.** Consider $n>2$.
 
@@ -239,17 +239,17 @@ $$
 \end{equation*}
 $$
 
-- In case 0, if $X_0=0$ then every other person will find and pick its own jacket. Thus 
+- In case 0, if $X_0=0$ then every other person will find and pick their own jacket. Thus 
 
 $$
 \mathbb{P}[X_{n-1}=n-1 | X_0=0]\cdot \mathbb{P}[X_0=0] = 1 \cdot \frac{1}{n} = \frac1n.
 $$ 
-- In case 1, if $X_0=n-1$ then of course person $n-1$ cannot have its own jacket. Thus
+- In case 1, if $X_0=n-1$ then of course person $n-1$ cannot have their own jacket. Thus
 
 $$
 \mathbb{P}[X_{n-1}=n-1 | X_0=n-1]\cdot \mathbb{P}[X_0=n-1] = 0 \cdot \frac{1}{n} = 0.
 $$ 
-- In case 2, suppose $X_0=k$, for some given $k\in\{1,\ldots, n-2\}$. After that, people with numbers #$i=1,\ldots,k-1$ will necessarily each take its own jacket and leave. Then we will eventually have a situation with $n-k$ people numbered $k,k+1,\ldots,n-1$ and $n-k$ jackets numbered $0,k+1,k+2,\ldots,n-1$. This scenario is equivalent to the original setting but with a smaller number $n'=n-k$ of people, modulo some relabelling of people/jackets. The fact that the first remaining jacket (#0) is not the original jacket of the first remaining person (#$k$) is irrelevant since, in this situation, he/she will pick a jacket at random, just as he/she would if the game were just starting with each person's original jackets. Thus
+- In case 2, suppose $X_0=k$, for some given $k\in\lbrace 1,\ldots, n-2\rbrace$. After that, people with numbers #$i=1,\ldots,k-1$ will necessarily each take their own jacket and leave. Then we will eventually have a situation with $n-k$ people numbered $k,k+1,\ldots,n-1$ and $n-k$ jackets numbered $0,k+1,k+2,\ldots,n-1$. This scenario is equivalent to the original setting but with a smaller number $n'=n-k$ of people, modulo some relabelling of people/jackets. The fact that the first remaining jacket (0) is not the original jacket of the first remaining person ($k$) is irrelevant since, in this situation, he/she will pick a jacket at random, just as he/she would if the game were just starting with each person's original jackets. Thus
 
 $$
 \begin{equation*}
@@ -274,7 +274,7 @@ $$\mathbb{P}[X_{n-1}=n-1] = \frac1n + 0 + \frac{n-2}{2n} = \frac12.$$
 **Assumption:** $n$ is finite and known.
 
 In this case, let's say the number in the paper you picked is $A=k$. Let $B$ be the number in the other piece of paper. There are $n-1$ possibilities for $B$, of which, $k-1$ are smaller than $k$, and $n-k$ are greater than $k$. 
-Thus, as a strategy, you can pick a number $T$ uniformily at random in $\{1,\ldots,k-1,k+1,\ldots,n\}$ and call:
+Thus, as a strategy, you can pick a number $T$ uniformily at random in $\lbrace 1,\ldots,k-1,k+1,\ldots,n\rbrace$ and call:
 - $A < B$ (the number you chose is the smallest), if  $T > k$; or else
 - $B < A$ (the number you chose is the greatest),  if $T < k$.
 
