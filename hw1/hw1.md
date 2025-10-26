@@ -138,12 +138,12 @@ $$
 
 ---
 
-Setting $\delta = 1/2$ and $\mu = \mathbb{E}[X_q]= n/m$, and applying the Chernoff Inequality, we have
+Setting $\delta = 1/2$ and $\mu = \mathbb{E}[X_s]= n/m$, and applying the Chernoff Inequality, we have
 
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{P}[X_q < 1.5\mu] &> 1 - \exp\left(-\frac{\frac14}{2+\frac12}\mu\right)\\
+\mathbb{P}[X_s < 1.5\mu] &> 1 - \exp\left(-\frac{\frac14}{2+\frac12}\mu\right)\\
 &= 1 - (e^{\frac nm})^{-\frac{1}{10}}
 \end{split}
 \end{equation*}
@@ -154,7 +154,7 @@ Since $n\gg 120m\ln m$, we have
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{P}[X_q < 1.5\mu] &> 
+\mathbb{P}[X_s < 1.5\mu] &> 
 1 - (e^{\frac{120m\ln m}{m}})^{-\frac{1}{10}} \\
 &= 1 - (e^{120\ln m})^{-\frac{1}{10}} \\
 &= 1 - (e^{\ln m})^{-\frac{120}{10}} \\
@@ -168,8 +168,8 @@ $$
 We want to prove that the upper bound on the number of served queries hold for all machines simultaneously with high probability. That is
 
 $$
-\mathbb{P}[\forall q, X_q < 1.5\mu)] > 1 - m^{-c_2}
-\iff \mathbb{P}[\exists q, X_q \geq 1.5\mu)] \leq m^{-c_2},
+\mathbb{P}[\forall s, X_s < 1.5\mu)] > 1 - m^{-c_2}
+\iff \mathbb{P}[\exists s, X_s \geq 1.5\mu)] \leq m^{-c_2},
 $$
 
 for some constant $c_2$. By the union bound
@@ -177,9 +177,9 @@ for some constant $c_2$. By the union bound
 $$
 \begin{equation*}
 \begin{split}
-\mathbb{P}[\exists q, X_q \geq 1.5\mu] 
-&\leq \sum_{q=0}^{m-1} \mathbb{P}[X_q \geq 1.5\mu] \\
-&\leq \sum_{q=0}^{m-1} m^{-c_1} \qquad(3.2)\\
+\mathbb{P}[\exists s, X_s \geq 1.5\mu] 
+&\leq \sum_{s=0}^{m-1} \mathbb{P}[X_s \geq 1.5\mu] \\
+&\leq \sum_{s=0}^{m-1} m^{-c_1} \qquad(3.2)\\
 &= m\cdot m^{-c_1} = m^{-c_1+1}.
 \end{split}
 \end{equation*}
